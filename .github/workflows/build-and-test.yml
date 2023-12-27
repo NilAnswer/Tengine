@@ -119,7 +119,7 @@ jobs:
     - name: Zip directory
       run: |
         cd D:\\a\\Tengine\\
-        zip -r win64v2019.zip Tengine
+        Compress-Archive -Path D:\\a\\Tengine\\Tengine -DestinationPath win64v2019.zip
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
@@ -139,7 +139,7 @@ jobs:
     - name: Zip directory
       run: |
         cd D:\\a\\Tengine\\
-        zip -r win32v2019.zip Tengine
+        Compress-Archive -Path D:\\a\\Tengine\\Tengine -DestinationPath win32v2019.zip
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
