@@ -1,8 +1,8 @@
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR mipsel)
 
-set(CMAKE_C_COMPILER "mipsel-linux-gnu-gcc")
-set(CMAKE_CXX_COMPILER "mipsel-linux-gnu-g++")
+set(CMAKE_C_COMPILER "mips-linux-gnu-gcc")
+set(CMAKE_CXX_COMPILER "mips-linux-gnu-g++")
 
 if(NOT CMAKE_FIND_ROOT_PATH_MODE_PROGRAM)
     set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
@@ -17,8 +17,8 @@ if(NOT CMAKE_FIND_ROOT_PATH_MODE_PACKAGE)
     set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 endif()
 
-set(CMAKE_C_FLAGS "-march=mips32r2")
-set(CMAKE_CXX_FLAGS "-march=mips32r2")
+set(CMAKE_C_FLAGS "-march=mips")
+set(CMAKE_CXX_FLAGS "-march=mips")
 
 # cache flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" CACHE STRING "c flags")
