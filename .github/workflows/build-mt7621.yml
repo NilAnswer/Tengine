@@ -1,0 +1,63 @@
+name: Build MT7621
+
+on:
+  push:
+    branches: [tengine-lite]
+    paths-ignore: 
+    - 'doc/**'
+    - 'README.md'
+    - 'README_EN.md'
+  pull_request:
+    branches: [tengine-lite]
+    paths-ignore: 
+    - 'doc/**'
+    - 'README.md'
+    - 'README_EN.md'
+
+jobs:     
+  linux-gcc-mips32:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: cancel-previous-runs
+      uses: styfle/cancel-workflow-action@0.11.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: cache-qemu
+      id: cache-qemu
+      uses: actions/cache@v3
+      with:
+        path: qemu-install
+        key: qemu-mips-install-1
+    - name: checkout-qemu
+      if: steps.cache-qemu.outputs.cache-hit != 'true'
+      uses: actions/checkout@v3
+      with:
+        repository: qemu/qemu
+        path: qemu
+        ref: 8746309137ba470d1b2e8f5ce86ac228625db940
+    - name: qemu
+      if: steps.cache-qemu.outputs.cache-hit != 'true'
+      run: |
+        cd qemu
+        ./configure --prefix=install --target-list=mips-linux-user --disable-system
+        make -j2
+        make install
+        cp -r mips64el-linux-user/install $GITHUB_WORKSPACE/qemu-install
+    - name: mips-32r2-toolchain
+      run: |
+        sudo apt-get update
+        sudo apt-get install g++-mips-linux-gnu
+    - name: configure
+      run: mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/mips32r2-linux-gnu.toolchain.cmake -DTENGINE_BUILD_EXAMPLES=OFF ..
+    - name: build
+      run: cmake --build build -j 2
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r mips.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mips
+        path: /home/runner/work/Tengine/mips.zip
