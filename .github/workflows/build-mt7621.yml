@@ -61,3 +61,50 @@ jobs:
       with:
         name: mips
         path: /home/runner/work/Tengine/mips.zip
+
+  build-benchmark:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: cancel-previous-runs
+      uses: styfle/cancel-workflow-action@0.11.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - name: cache-qemu
+      id: cache-qemu
+      uses: actions/cache@v3
+      with:
+        path: qemu-install
+        key: qemu-mips-install-1
+    - name: checkout-qemu
+      if: steps.cache-qemu.outputs.cache-hit != 'true'
+      uses: actions/checkout@v3
+      with:
+        repository: qemu/qemu
+        path: qemu
+        ref: 8746309137ba470d1b2e8f5ce86ac228625db940
+    - name: qemu
+      if: steps.cache-qemu.outputs.cache-hit != 'true'
+      run: |
+        cd qemu
+        ./configure --prefix=install --target-list=mips-linux-user --disable-system
+        make -j2
+        make install
+        cp -r mips-linux-user/install $GITHUB_WORKSPACE/qemu-install
+    - name: mips-32r2-toolchain
+      run: |
+        sudo apt-get update
+        sudo apt-get install g++-mips-linux-gnu
+    - name: configure
+      run: cd benchmark && mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../../toolchains/mips32r2-linux-gnu.toolchain.cmake -DTENGINE_BUILD_EXAMPLES=OFF -DTENGINE_BUILD_BENCHMARK=OFF ..
+    - name: build
+      run: cmake --build build -j 2
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r benchmark.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mips
+        path: /home/runner/work/Tengine/benchmark.zip
