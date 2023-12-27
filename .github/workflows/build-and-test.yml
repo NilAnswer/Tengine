@@ -3,7 +3,6 @@ name: Build and test
 on:
   push:
     branches: [tengine-lite]
-    paths:
     paths-ignore: 
     - 'doc/**'
     - 'README.md'
@@ -56,7 +55,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mipsel
+        name: armv7
         path: /home/runner/work/Tengine/armv7.zip
 
         
@@ -104,7 +103,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mipsel
+        name: mips
         path: /home/runner/work/Tengine/mips.zip
 
   windows-x64-cpu-vs2017:
@@ -118,13 +117,13 @@ jobs:
         cmake --build . --config Release -j 2
     - name: Zip directory
       run: |
-        cd /home/runner/work/Tengine/
+        cd D:\\a\\Tengine\\
         zip -r win64v2017.zip Tengine
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mipsel
-        path: /home/runner/work/Tengine/win64v2017.zip
+        name: win64v2017
+        path: D:\\a\\Tengine\\win64v2017.zip
 
   windows-x64-cpu-vs2019:
     runs-on: windows-latest
@@ -142,8 +141,8 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mipsel
-        path: /home/runner/work/Tengine/win64v2019.zip
+        name: win64v2019
+        path: D:\\a\\Tengine\\win64v2019.zip
 
   windows-x86-cpu-vs2017:
     runs-on: windows-2016
@@ -156,13 +155,13 @@ jobs:
         cmake --build . --config Release -j 2
     - name: Zip directory
       run: |
-        cd /home/runner/work/Tengine/
+        cd D:\\a\\Tengine\\
         zip -r win32v2017.zip Tengine
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mipsel
-        path: /home/runner/work/Tengine/win32v2017.zip
+        name: win32v2017
+        path: D:\\a\\Tengine\\win32v2017.zip
 
   windows-x86-cpu-vs2019:
     runs-on: windows-latest
@@ -175,10 +174,10 @@ jobs:
         cmake --build . --config Release -j 2
     - name: Zip directory
       run: |
-        cd /home/runner/work/Tengine/
+        cd D:\\a\\Tengine\\
         zip -r win32v2019.zip Tengine
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: mipsel
-        path: /home/runner/work/Tengine/win32v2019.zip
+        name: win32v2019
+        path: D:\\a\\Tengine\\win32v2019.zip
