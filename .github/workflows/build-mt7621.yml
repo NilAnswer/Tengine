@@ -47,7 +47,7 @@ jobs:
     - name: mips-32r2-toolchain
       run: |
         sudo apt-get update
-        sudo apt-get install g++-mips-linux-gnu
+        sudo apt-get install g++-mipsel-linux-gnu
     - name: configure
       run: mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/mips32r2-linux-gnu.toolchain.cmake -DTENGINE_BUILD_EXAMPLES=OFF ..
     - name: build
