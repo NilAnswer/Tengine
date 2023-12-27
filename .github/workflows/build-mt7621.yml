@@ -43,7 +43,7 @@ jobs:
         ./configure --prefix=install --target-list=mipsel-linux-user --disable-system
         make -j2
         make install
-        cp -r mips-linux-user/install $GITHUB_WORKSPACE/qemu-install
+        cp -r mipsel-linux-user/install $GITHUB_WORKSPACE/qemu-install
     - name: mips-32r2-toolchain
       run: |
         sudo apt-get update
