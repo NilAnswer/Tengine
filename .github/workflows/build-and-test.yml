@@ -49,6 +49,15 @@ jobs:
       run: mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabi.toolchain.cmake -DTENGINE_BUILD_TESTS=ON ..
     - name: build
       run: cmake --build build -j 2
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r armv7.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mipsel
+        path: /home/runner/work/Tengine/armv7.zip
 
         
   linux-gcc-mipsisa64r6el:
@@ -88,7 +97,15 @@ jobs:
       run: mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/mipsisa64r6el-linux-gnuabi64.toolchain.cmake -DTENGINE_BUILD_EXAMPLES=OFF ..
     - name: build
       run: cmake --build build -j 2
-
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r mips.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mipsel
+        path: /home/runner/work/Tengine/mips.zip
 
   windows-x64-cpu-vs2017:
     runs-on: windows-2016
@@ -99,7 +116,15 @@ jobs:
         mkdir build; cd build
         cmake -T v141,host=x64 -A x64 -DTENGINE_OPENMP=OFF -DTENGINE_BUILD_EXAMPLES=OFF ..
         cmake --build . --config Release -j 2
-
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r win64v2017.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mipsel
+        path: /home/runner/work/Tengine/win64v2017.zip
 
   windows-x64-cpu-vs2019:
     runs-on: windows-latest
@@ -110,7 +135,15 @@ jobs:
         mkdir build; cd build
         cmake -A x64 -DTENGINE_BUILD_EXAMPLES=OFF ..
         cmake --build . --config Release -j 2
-
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r win64v2019.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mipsel
+        path: /home/runner/work/Tengine/win64v2019.zip
 
   windows-x86-cpu-vs2017:
     runs-on: windows-2016
@@ -121,7 +154,15 @@ jobs:
         mkdir build; cd build
         cmake -T v141,host=x64 -A Win32 -DTENGINE_OPENMP=OFF -DTENGINE_BUILD_EXAMPLES=OFF ..
         cmake --build . --config Release -j 2
-
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r win32v2017.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mipsel
+        path: /home/runner/work/Tengine/win32v2017.zip
 
   windows-x86-cpu-vs2019:
     runs-on: windows-latest
@@ -132,4 +173,12 @@ jobs:
         mkdir build; cd build
         cmake -T v142,host=x64 -A Win32 -DTENGINE_BUILD_EXAMPLES=OFF ..
         cmake --build . --config Release -j 2
-
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r win32v2019.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: mipsel
+        path: /home/runner/work/Tengine/win32v2019.zip
