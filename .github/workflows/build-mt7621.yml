@@ -28,7 +28,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: qemu-install
-        key: qemu-mips-install-1
+        key: qemu-mipsel-install-1
     - name: checkout-qemu
       if: steps.cache-qemu.outputs.cache-hit != 'true'
       uses: actions/checkout@v3
@@ -40,7 +40,7 @@ jobs:
       if: steps.cache-qemu.outputs.cache-hit != 'true'
       run: |
         cd qemu
-        ./configure --prefix=install --target-list=mips-linux-user --disable-system
+        ./configure --prefix=install --target-list=mipsel-linux-user --disable-system
         make -j2
         make install
         cp -r mips-linux-user/install $GITHUB_WORKSPACE/qemu-install
