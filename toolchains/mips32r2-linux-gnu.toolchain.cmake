@@ -17,8 +17,8 @@ if(NOT CMAKE_FIND_ROOT_PATH_MODE_PACKAGE)
     set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 endif()
 
-set(CMAKE_C_FLAGS "-march=mips32 -mabi=32 -mnan=2008 -mfp64")
-set(CMAKE_CXX_FLAGS "-march=mips32 -mabi=32 -mnan=2008 -mfp64")
+set(CMAKE_C_FLAGS "-march=mips32 -mabi=32")
+set(CMAKE_CXX_FLAGS "-march=mips32 -mabi=32")
 
 # cache flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" CACHE STRING "c flags")
