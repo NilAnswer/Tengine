@@ -1,8 +1,8 @@
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR mips32el)
 
-set(CMAKE_C_COMPILER "mips-linux-gnu-gcc")
-set(CMAKE_CXX_COMPILER "mips-linux-gnu-g++")
+set(CMAKE_C_COMPILER "mipsel-linux-gnu-gcc")
+set(CMAKE_CXX_COMPILER "mipsel-linux-gnu-g++")
 
 if(NOT CMAKE_FIND_ROOT_PATH_MODE_PROGRAM)
     set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
