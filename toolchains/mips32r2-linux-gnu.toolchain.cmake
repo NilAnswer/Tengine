@@ -1,5 +1,5 @@
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR mips32el)
+set(CMAKE_SYSTEM_PROCESSOR mipsel)
 
 set(CMAKE_C_COMPILER "mipsel-linux-gnu-gcc")
 set(CMAKE_CXX_COMPILER "mipsel-linux-gnu-g++")
