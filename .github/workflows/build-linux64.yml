@@ -48,9 +48,9 @@ jobs:
       env:
         CC: clang
         CXX: clang++    
-      run: mkdir build && cd build && cmake -DTENGINE_BUILD_TESTS=ON -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX  ..
+      run: mkdir build && cd build && cmake -DTENGINE_BUILD_TESTS=ON -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX -DCMAKE_C_FLAGS=-fPIC -DCMAKE_CXX_FLAGS=-fPIC  ..
     - name: build
-      run: cmake --build build -j 2
+      run: cmake -DCMAKE_C_FLAGS=-fPIC -DCMAKE_CXX_FLAGS=-fPIC --build build -j 2
     - name: Zip directory
       run: |
         cd /home/runner/work/Tengine/
