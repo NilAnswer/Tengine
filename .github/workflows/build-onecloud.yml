@@ -45,7 +45,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install g++-arm-linux-gnueabihf
     - name: configure
-      run: mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake -DTENGINE_BUILD_TESTS=OFF -DTENGINE_BUILD_CONVERT_TOOL=ON -TENGINE_BUILD_EXAMPLES=OFF ..
+      run: mkdir build && cd build && cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/arm-linux-gnueabihf.toolchain.cmake -DTENGINE_BUILD_TESTS=OFF -DTENGINE_BUILD_CONVERT_TOOL=ON ..
     - name: build
       run: cmake --build build -j 2
     - name: Zip directory
