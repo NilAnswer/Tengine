@@ -21,7 +21,7 @@
 
 # Check CMake version
 CMAKE_MINIMUM_REQUIRED (VERSION 3.13 FATAL_ERROR)
-
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Disable inplace builds to prevent source tree corruption.
 IF (" ${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
     MESSAGE (FATAL_ERROR "Tengine Fatal: Building inplace are not allowed. You should create a separate directory for Building.")
