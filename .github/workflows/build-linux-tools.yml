@@ -1,0 +1,60 @@
+name: Build Linux Tools
+
+on:
+  push:
+    branches: [tengine-lite]
+    paths-ignore: 
+    - 'doc/**'
+    - 'README.md'
+    - 'README_EN.md'
+  pull_request:
+    branches: [tengine-lite]
+    paths-ignore: 
+    - 'doc/**'
+    - 'README.md'
+    - 'README_EN.md'
+
+jobs:
+  linux-x64-cpu-tools-convert:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: update
+      run: |
+        sudo apt-get update
+        sudo apt-get install libprotobuf-dev protobuf-compiler
+    - name: configure
+      run: mkdir build && cd build && cmake -DTENGINE_BUILD_CONVERT_TOOL=ON ..
+    - name: build
+      run: cmake --build build -j 2
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r convert.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: convert
+        path: /home/runner/work/Tengine/convert.zip
+        
+  linux-x64-cpu-tools-quant:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: update
+      run: |
+        sudo apt-get update
+        sudo apt-get install libprotobuf-dev protobuf-compiler libopencv-dev
+    - name: configure
+      run: mkdir build && cd build && cmake -DTENGINE_BUILD_QUANT_TOOL=ON ..
+    - name: build
+      run: cmake --build build -j2     
+    - name: Zip directory
+      run: |
+        cd /home/runner/work/Tengine/
+        zip -r quant.zip Tengine
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: quant
+        path: /home/runner/work/Tengine/quant.zip
