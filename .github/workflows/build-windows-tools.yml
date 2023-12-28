@@ -22,7 +22,7 @@ jobs:
     - name: build
       run: |
         mkdir build; cd build
-        cmake -A x64 -DTENGINE_BUILD_EXAMPLES=ON -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
+        cmake -A x64 -DTENGINE_BUILD_EXAMPLES=OFF -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
         cmake --build . --config Release -j 2
     - name: Zip directory
       run: |
@@ -42,7 +42,7 @@ jobs:
     - name: build
       run: |
         mkdir build; cd build
-        cmake -T v142,host=x64 -A Win32 -DTENGINE_BUILD_EXAMPLES=ON -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
+        cmake -T v142,host=x64 -A Win32 -DTENGINE_BUILD_EXAMPLES=OFF -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
         cmake --build . --config Release -j 2
     - name: Zip directory
       run: |
