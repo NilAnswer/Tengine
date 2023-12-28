@@ -1,0 +1,55 @@
+name: Build Windows Tools
+
+on:
+  push:
+    branches: [tengine-lite]
+    paths-ignore: 
+    - 'doc/**'
+    - 'README.md'
+    - 'README_EN.md'
+  pull_request:
+    branches: [tengine-lite]
+    paths-ignore: 
+    - 'doc/**'
+    - 'README.md'
+    - 'README_EN.md'
+
+jobs:
+  windows-x64-cpu-vs2019:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: |
+        mkdir build; cd build
+        cmake -A x64 -DTENGINE_BUILD_EXAMPLES=ON -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
+        cmake --build . --config Release -j 2
+    - name: Zip directory
+      run: |
+        cd D:\\a\\Tengine\\
+        Compress-Archive -Path D:\\a\\Tengine\\Tengine -DestinationPath win64v2019.zip
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: win64v2019
+        path: D:\\a\\Tengine\\win64v2019.zip
+
+
+  windows-x86-cpu-vs2019:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: |
+        mkdir build; cd build
+        cmake -T v142,host=x64 -A Win32 -DTENGINE_BUILD_EXAMPLES=ON -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
+        cmake --build . --config Release -j 2
+    - name: Zip directory
+      run: |
+        cd D:\\a\\Tengine\\
+        Compress-Archive -Path D:\\a\\Tengine\\Tengine -DestinationPath win32v2019.zip
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: win32v2019
+        path: D:\\a\\Tengine\\win32v2019.zip
