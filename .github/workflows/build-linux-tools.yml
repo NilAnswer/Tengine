@@ -30,6 +30,7 @@ jobs:
     - name: Zip directory
       run: |
         cd /home/runner/work/Tengine/
+        find / -name "libprotobuf.so.23" -exec cp {} /home/runner/work/Tengine/ \; 2>/dev/null
         zip -r convert.zip Tengine
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
@@ -52,6 +53,7 @@ jobs:
     - name: Zip directory
       run: |
         cd /home/runner/work/Tengine/
+        find / -name "libprotobuf.so.23" -exec cp {} /home/runner/work/Tengine/ \; 2>/dev/null
         zip -r quant.zip Tengine
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
