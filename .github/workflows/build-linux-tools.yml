@@ -27,7 +27,7 @@ jobs:
       run: |
         cp /usr/lib/x86_64-linux-gnu/libprotobuf.so.23 /home/runner/work/Tengine/
     - name: configure
-      run: mkdir build && cd build && cmake -DTENGINE_BUILD_TESTS=OFF -DTENGINE_BUILD_CONVERT_TOOL=ON -DTENGINE_BUILD_QUANT_TOOL=ON ..
+      run: mkdir build && cd build && cmake -DTENGINE_BUILD_TESTS=OFF -DTENGINE_BUILD_CONVERT_TOOL=ON ..
     - name: build
       run: cmake --build build -j 2
     - name: Zip directory
