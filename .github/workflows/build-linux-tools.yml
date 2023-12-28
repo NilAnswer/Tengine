@@ -25,4 +25,4 @@ jobs:
         sudo apt-get install libprotobuf-dev protobuf-compiler
     - name: find lib
       run: |
-        find / -name "libprotobuf.so.23"
+        cp /usr/lib/x86_64-linux-gnu/libprotobuf.so.23 /home/runner/work/Tengine/
