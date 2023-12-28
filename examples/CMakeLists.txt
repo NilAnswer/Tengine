@@ -107,7 +107,7 @@ ENDIF()
 
 # add examples with opencv
 # set(OpenCV_DIR /mnt/d/ubuntu/opencv_install/linux-armv7/lib/cmake/opencv4)
-FIND_PACKAGE(OpenCV)
+# FIND_PACKAGE(OpenCV)
 
 IF (OpenCV_FOUND)
     # macro for adding examples
